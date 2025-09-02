@@ -61,7 +61,7 @@ public class EvasiveStrategy implements Strategy {
             robot.turnLeft(90);
         }
 
-        robot.ahead(80); //Se adelanta
+        robot.ahead(100); //Se adelanta
         robot.turnGunRight(360); // Radar de búsqueda
     }
 }
