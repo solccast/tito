@@ -1,24 +1,26 @@
-package prueba1;
+package laboratorio;
 
 import robocode.JuniorRobot;
 
-public class Ataque implements Strategy{
+public class EvasiveStrategy implements Strategy {
 
     @Override
-    public void run(JuniorRobot robot) {
-        //Movimiento inicial en búsqueda del enemigo
-        while(true){
-            // ZigZag
-            robot.ahead(150);
-            robot.turnRight(45);
+    public void run(JuniorRobot r) {
+        r.turnGunRight(360);
+        r.ahead(100);
+        r.back(100);
+        r.turnGunLeft(360);
+        this.changeSenseZigZag(r, 75, 45);
+    }
 
-            robot.ahead(100);
-            robot.turnLeft(90);
+    private void changeSenseZigZag(JuniorRobot r, int distance, int angle) {
+        r.ahead(distance);
 
-            // Radar girando para detectar constantemente a los otros
-            robot.turnGunRight(360); //Giro completo
-        }
+        r.turnRight(angle);
+        r.ahead(distance);
 
+        r.turnLeft(angle);
+        r.ahead(distance);
     }
 
     @Override
@@ -29,8 +31,7 @@ public class Ataque implements Strategy{
         } else if (robot.energy < 30 && robot.scannedDistance < 15){ // Si el robot posea ba
 
             robot.fire(1);
-        } else robot.back(30); // Acá cambiaría de state
-
+        } else robot.back(30);
     }
 
     @Override
@@ -60,7 +61,7 @@ public class Ataque implements Strategy{
             robot.turnLeft(90);
         }
 
-        robot.ahead(100); //Se adelanta
+        robot.ahead(80); //Se adelanta
         robot.turnGunRight(360); // Radar de búsqueda
     }
 }
