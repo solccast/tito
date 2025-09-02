@@ -26,12 +26,11 @@ public class EvasiveStrategy implements Strategy {
     @Override
     public void onScannedRobot(JuniorRobot robot) {
         robot.turnGunTo(robot.scannedAngle);
-        if (robot.scannedDistance < 15 && robot.energy > 30) { // Si el robot se encuentra cerca y hay energía suficiente. Atacar.
+        if (robot.energy >= 70 && robot.scannedDistance <= 15) { // Si el robot se encuentra cerca y hay energía suficiente. Atacar.
             robot.fire(3);
-        } else if (robot.energy < 30 && robot.scannedDistance < 15){ // Si el robot posea ba
-
+        } else if (robot.scannedDistance <= 35){
             robot.fire(1);
-        } else robot.back(30);
+        } else robot.turnRight(20);// Acá cambiaría a turnBack, para alejarse del enemigo
     }
 
     @Override
@@ -47,7 +46,7 @@ public class EvasiveStrategy implements Strategy {
     public void onHitRobot(JuniorRobot robot){
         // Si se choca con un robot -> actitud reactiva y de escape.
         robot.turnGunTo(robot.hitRobotAngle);
-        robot.fire(3);
+        robot.fire(2);
         robot.turnBackLeft(50, 45);
     }
 

@@ -2,21 +2,23 @@ package laboratorio;
 import robocode.*;
 
 
-public class LaboRobot extends JuniorRobot
+public class Renault12 extends JuniorRobot
 {
     private Strategy strategy;
-    private Mode status;
 
-    public LaboRobot() {
-        this.status = Orchestrator.getInstance();
-        this.strategy = status.checkMode(this);
+    public Renault12() {
+        this.strategy = checkStrategy();
+    }
+
+    private Strategy checkStrategy() {
+        return (this.others > 10 && this.energy > 50) ? new EvasiveStrategy() : new DamageStrategy();
     }
 
     @Override
     public void run() {
         setColors(black, yellow, black, yellow, red);
         while(true) {
-            this.strategy = status.checkMode(this);
+            this.strategy = checkStrategy();
             strategy.run(this);
         }
     }

@@ -23,12 +23,11 @@ public class DamageStrategy implements Strategy{
         @Override
         public void onScannedRobot(JuniorRobot robot) {
             robot.turnGunTo(robot.scannedAngle);
-            if (robot.scannedDistance < 15 && robot.energy > 30) { // Si el robot se encuentra cerca y hay energía suficiente. Atacar.
+            if (robot.scannedDistance < 15 && robot.energy >= 20) { // Si el robot se encuentra cerca y hay energía suficiente. Atacar.
                 robot.fire(3);
-            } else if (robot.energy < 30 && robot.scannedDistance < 15){ // Si el robot posea ba
-
+            } else if (robot.energy < 20 && robot.scannedDistance < 25){ // Si el robot posea ba
                 robot.fire(1);
-            } else robot.back(30); // Acá cambiaría de state
+            } else robot.back(30); 
 
         }
 
