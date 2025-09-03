@@ -27,7 +27,7 @@ public class EvasiveStrategy extends Strategy {
     @Override
     public void onScannedRobot(JuniorRobot robot) {
         robot.turnGunTo(robot.scannedAngle);
-        if (robot.energy >= 70 && robot.scannedDistance <= 15) { // Si el robot se encuentra cerca y hay energía suficiente. Atacar.
+        if (robot.scannedDistance <= 15) { // Si el robot se encuentra cerca. Atacar.
             robot.fire(3);
         } else if (robot.scannedDistance <= 35) {
             robot.fire(1);

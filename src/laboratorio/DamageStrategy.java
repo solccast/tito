@@ -22,9 +22,7 @@ public class DamageStrategy extends Strategy{
             robot.turnGunTo(robot.scannedAngle);
             if (robot.scannedDistance < 15 && robot.energy >= 20) { // Si el robot se encuentra cerca y hay energía suficiente. Atacar.
                 robot.fire(3);
-            } else if (robot.energy < 20 && robot.scannedDistance < 25){
-                robot.fire(1);
-            } else robot.back(30);
+            } else{ robot.back(30);};
         }
 
         @Override
