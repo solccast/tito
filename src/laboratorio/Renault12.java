@@ -11,7 +11,11 @@ public class Renault12 extends JuniorRobot
     }
 
     private Strategy checkStrategy() {
-        return (this.others > 10 && this.energy > 50) ? new EvasiveStrategy() : new DamageStrategy();
+        if ((this.others > 15 && this.energy > 80) || (this.energy < 20)) {
+            return new EvasiveStrategy();
+        } else {
+            return new DamageStrategy();
+        }
     }
 
     @Override
@@ -36,5 +40,10 @@ public class Renault12 extends JuniorRobot
     @Override
     public void onHitWall() {
         strategy.onHitWall(this);
+    }
+
+    @Override
+    public void onHitRobot(){
+        strategy.onHitRobot(this);
     }
 }

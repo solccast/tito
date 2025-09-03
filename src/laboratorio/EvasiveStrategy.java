@@ -2,7 +2,8 @@ package laboratorio;
 
 import robocode.JuniorRobot;
 
-public class EvasiveStrategy implements Strategy {
+public class EvasiveStrategy extends Strategy {
+
 
     @Override
     public void run(JuniorRobot r) {
@@ -28,39 +29,32 @@ public class EvasiveStrategy implements Strategy {
         robot.turnGunTo(robot.scannedAngle);
         if (robot.energy >= 70 && robot.scannedDistance <= 15) { // Si el robot se encuentra cerca y hay energía suficiente. Atacar.
             robot.fire(3);
-        } else if (robot.scannedDistance <= 35){
+        } else if (robot.scannedDistance <= 35) {
             robot.fire(1);
-        } else robot.turnRight(20);// Acá cambiaría a turnBack, para alejarse del enemigo
+        } else {
+            robot.turnRight(180);// Acá cambiaría a turnBack, para alejarse del enemigo
+            robot.back(30);
+        }
     }
 
     @Override
     public void onHitByBullet(JuniorRobot robot) {
         // Actitud reactiva ->  gira y ataca a quien lo atacó pero de soft
         int angleBullet = robot.hitByBulletAngle;
-        robot.turnTo(angleBullet);
         robot.turnGunTo(angleBullet);
         robot.fire(1);
+        //Escape
+        int anguloEscape = (int) (Math.random() * 180) - 90;
+        robot.turnBackRight(100, anguloEscape);
     }
 
     @Override
-    public void onHitRobot(JuniorRobot robot){
-        // Si se choca con un robot -> actitud reactiva y de escape.
-        robot.turnGunTo(robot.hitRobotAngle);
-        robot.fire(2);
-        robot.turnBackLeft(50, 45);
-    }
-
-    @Override
-    public void onHitWall(JuniorRobot robot){
-        // Una vez que choca contra la pared se distancia y el giro es aleatorio
+    public void onHitRobot(JuniorRobot robot) {
+        robot.turnGunTo(robot.scannedAngle);
+        robot.fire(1);
         robot.back(50);
-        if (Math.random() > 0.5){
-            robot.turnRight(90);
-        } else {
-            robot.turnLeft(90);
-        }
-
-        robot.ahead(100); //Se adelanta
-        robot.turnGunRight(360); // Radar de búsqueda
+        robot.turnRight(90);
+        robot.ahead(120);
     }
+
 }
