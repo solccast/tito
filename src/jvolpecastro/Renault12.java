@@ -1,49 +1,39 @@
-package laboratorio;
+package jvolpecastro;
 import robocode.*;
 
+public class Renault12 extends JuniorRobot {
 
-public class Renault12 extends JuniorRobot
-{
-    private Strategy strategy;
+    private RandomStrategist strategist;
 
     public Renault12() {
-        this.strategy = checkStrategy();
-    }
-
-    private Strategy checkStrategy() {
-        if ((this.others > 15 && this.energy > 80) || (this.energy < 20)) {
-            return new EvasiveStrategy();
-        } else {
-            return new DamageStrategy();
-        }
+        this.strategist = RandomStrategist.getInstance();  // Usa Singleton
     }
 
     @Override
     public void run() {
-        setColors(black, yellow, black, yellow, red);
+        setColors(blue, blue, yellow, black, yellow);
         while(true) {
-            this.strategy = checkStrategy();
-            strategy.run(this);
+            strategist.run(this);  // Delegamos en el estratega
         }
     }
 
     @Override
     public void onScannedRobot() {
-        strategy.onScannedRobot(this);
+        strategist.onScannedRobot(this);
     }
 
     @Override
     public void onHitByBullet() {
-        strategy.onHitByBullet(this);
+        strategist.onHitByBullet(this);
     }
 
     @Override
     public void onHitWall() {
-        strategy.onHitWall(this);
+        strategist.onHitWall(this);
     }
 
     @Override
-    public void onHitRobot(){
-        strategy.onHitRobot(this);
+    public void onHitRobot() {
+        strategist.onHitRobot(this);
     }
 }

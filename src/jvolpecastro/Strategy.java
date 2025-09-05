@@ -1,4 +1,4 @@
-package laboratorio;
+package jvolpecastro;
 import robocode.JuniorRobot;
 
 public abstract class Strategy {
