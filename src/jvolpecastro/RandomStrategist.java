@@ -3,7 +3,7 @@ package jvolpecastro;
 import robocode.JuniorRobot;
 import java.util.Random;
 
-public class RandomStrategist {
+public class RandomStrategist extends Strategy{
 
     private static final RandomStrategist INSTANCE = new RandomStrategist();
     private Strategy currentStrategy;

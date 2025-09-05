@@ -3,7 +3,7 @@ import robocode.*;
 
 public class Renault12 extends JuniorRobot {
 
-    private RandomStrategist strategist;
+    private Strategy strategist;
 
     public Renault12() {
         this.strategist = RandomStrategist.getInstance();  // Usa Singleton
