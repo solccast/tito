@@ -5,7 +5,7 @@ public class TacheroStrategist extends  Strategy{
     private final static Strategy INSTANCE = new TacheroStrategist();
     private Strategy currentStrategy;
     private final Strategy fullAtack = new FullAtack();
-    private final Strategy Evasive = new Evasive();
+    private final Strategy evasive = new Evasive();
 
 
     public TacheroStrategist(){}
@@ -61,8 +61,23 @@ public class TacheroStrategist extends  Strategy{
 
         @Override
         public void run(JuniorRobot robot) {
-
+            robot.turnGunRight(360);
+            robot.ahead(100);
+            robot.back(100);
+            robot.turnGunLeft(360);
+            this.zigzagMove(robot, 75, 45);
         }
+
+        private void zigzagMove(JuniorRobot r, int distance, int angle) {
+            r.ahead(distance);
+
+            r.turnRight(angle);
+            r.ahead(distance);
+
+            r.turnLeft(angle);
+            r.ahead(distance);
+        }
+
 
         @Override
         public void onScannedRobot(JuniorRobot robot) {
@@ -113,7 +128,14 @@ public class TacheroStrategist extends  Strategy{
     public void onHitRobot(JuniorRobot robot) { currentStrategy.onHitRobot(robot);}
 
     public void checkStatus(JuniorRobot robot){
-        //Condiciones
+        if (robot.energy > 50){
+            currentStrategy = fullAtack;
+            System.out.println("Modo ATAQUE");
+        } else {
+            currentStrategy = evasive;
+            System.out.println("Modo EVASIVO");
+
+        }
     }
 
 

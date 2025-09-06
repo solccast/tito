@@ -6,7 +6,7 @@ public class Renault12 extends JuniorRobot {
     private Strategy strategist;
 
     public Renault12() {
-        this.strategist = RandomStrategist.getInstance();  // Usa Singleton
+        this.strategist = TacheroStrategist.getInstance();  // Usa Singleton
     }
 
     @Override
