@@ -3,9 +3,10 @@ package jvolpecastro;
 import robocode.JuniorRobot;
 import java.util.Random;
 
-public class RandomStrategist extends Strategy{
+/*Estratega con 2 clases  las cuáles permuta de forma aleatoria*/
+public class RandomStrategist implements IStrategist{
 
-    private static final RandomStrategist INSTANCE = new RandomStrategist();
+    private static final IStrategist INSTANCE = new RandomStrategist();
     private Strategy currentStrategy;
     private final Strategy strategy1 = new StrategyRandom1();
     private final Strategy strategy2 = new StrategyRandom2();
@@ -15,14 +16,14 @@ public class RandomStrategist extends Strategy{
         changeStrategy();
     }
 
-    public static RandomStrategist getInstance() {
+    public static IStrategist getInstance() {
         return INSTANCE;
     }
-
+    /*Se establece estrategia aleatoria dependiendo el booleano random obtenido*/
     private void changeStrategy() {
         currentStrategy = random.nextBoolean() ? strategy1 : strategy2;
     }
-
+    /* Primero cambia la estrategia y se llama el método run luego*/
     public void run(JuniorRobot robot) {
         changeStrategy();  // Cambia la estrategia en cada tick
         currentStrategy.run(robot);
@@ -44,7 +45,7 @@ public class RandomStrategist extends Strategy{
         currentStrategy.onHitRobot(robot);
     }
 
-    // Subestrategias que extienden la clase abstracta Strategy
+    /* Subestrategias que extienden la clase abstracta Strategy*/
     class StrategyRandom1 extends Strategy {
         @Override
         public void run(JuniorRobot robot) {
@@ -65,7 +66,7 @@ public class RandomStrategist extends Strategy{
 
         @Override
         public void onHitRobot(JuniorRobot robot) {
-            robot.fire(2);
+            robot.fire(1);
         }
     }
 

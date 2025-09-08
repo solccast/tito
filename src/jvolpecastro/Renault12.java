@@ -3,10 +3,10 @@ import robocode.*;
 
 public class Renault12 extends JuniorRobot {
 
-    private Strategy strategist;
+    private IStrategist strategist;
 
     public Renault12() {
-        this.strategist = TacheroStrategist.getInstance();  // Usa Singleton
+        this.strategist = RandomStrategist.getInstance();  // Usa Singleton
     }
 
     @Override

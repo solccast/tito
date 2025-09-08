@@ -1,8 +1,8 @@
 package jvolpecastro;
 import robocode.*;
 
-public class TacheroStrategist extends  Strategy{
-    private final static Strategy INSTANCE = new TacheroStrategist();
+public class TacheroStrategist implements IStrategist{
+    private final static IStrategist INSTANCE = new TacheroStrategist();
     private Strategy currentStrategy;
     private final Strategy fullAtack = new FullAtack();
     private final Strategy evasive = new Evasive();
@@ -10,7 +10,7 @@ public class TacheroStrategist extends  Strategy{
 
     public TacheroStrategist(){}
 
-    public static Strategy getInstance() {
+    public static IStrategist getInstance() {
         return INSTANCE;
     }
 
@@ -126,6 +126,9 @@ public class TacheroStrategist extends  Strategy{
 
     @Override
     public void onHitRobot(JuniorRobot robot) { currentStrategy.onHitRobot(robot);}
+
+    @Override
+    public void onHitWall(JuniorRobot robot) {currentStrategy.onHitWall(robot);}
 
     public void checkStatus(JuniorRobot robot){
         if (robot.energy > 50){
