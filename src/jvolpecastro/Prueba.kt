@@ -22,7 +22,6 @@ abstract class StrategyKotlin {
 
 class TacheroDefensor : StrategyKotlin() {
     override fun run(robot: JuniorRobot) {
-        TODO("Not yet implemented")
         robot.ahead(150)
         robot.turnRight(45)
         robot.ahead(100)
@@ -33,14 +32,25 @@ class TacheroDefensor : StrategyKotlin() {
     }
 
     override fun onScannedRobot(robot: JuniorRobot) {
-        TODO("Not yet implemented")
+        robot.turnGunTo(robot.scannedAngle)
+        if (robot.scannedAngle<15 && robot.energy >= 20){
+            robot.fire(3.0)
+        } else{
+            robot.back(30)
+        }
     }
 
     override fun onHitByBullet(robot: JuniorRobot) {
-        TODO("Not yet implemented")
+        // Actitud reactiva -> gira y ataca a quien lo atacó pero de soft
+        val angleBullet = robot.hitByBulletAngle
+        robot.turnTo(angleBullet)
+        robot.turnGunTo(angleBullet)
+        robot.fire(1.0)
     }
 
     override fun onHitRobot(robot: JuniorRobot) {
-        TODO("Not yet implemented")
+        robot.turnGunTo(robot.hitRobotAngle)
+        robot.fire(3.0)
+        robot.turnBackLeft(50, 45)
     }
 }
