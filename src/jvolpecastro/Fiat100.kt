@@ -9,8 +9,20 @@ class Fiat100: JuniorRobot() {
         estrategia.run(this)
     }
 
-    //Falta llamar al resto de métodos
-    //Falta probar si funciona con el otro tipo de estrategia
-    // y habría que cambiarle el nombre al file donde definí el strategy :( o reemplazarlo por otro más bonito xd
-    // Eliminar las clases java
+    override fun onScannedRobot(){
+        estrategia.onScannedRobot(this)
+    }
+
+    override fun onHitByBullet(){
+        estrategia.onHitByBullet(this)
+    }
+
+    override fun onHitRobot(){
+        estrategia.onHitRobot(this)
+    }
+
+    override fun onHitWall(){
+        estrategia.onHitWall(this)
+    }
+
 }
