@@ -4,7 +4,7 @@ import robocode.JuniorRobot
 
 class Fiat100 : JuniorRobot() {
 
-    private val strategist: IStrategist = getRandomStrategist()
+    private val strategist: IStrategist = getTacheroStrategist() // getRandomStrategist()
 
         override fun run() {
             setColors(blue, blue, yellow, black, yellow)
